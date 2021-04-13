@@ -1,5 +1,6 @@
 package net.feiyuyu.game.checkpoint;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,8 +12,12 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -23,6 +28,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import net.feiyuyu.game.R;
+import net.feiyuyu.game.ui.myGameView;
 
 import org.apache.http.util.EncodingUtils;
 
@@ -30,8 +36,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class learnVar extends Activity {
+public class  learnVar extends Activity {
 
     View cardView;
     View cardView1;
@@ -45,9 +53,27 @@ public class learnVar extends Activity {
     RadioButton choice1,choice2; //任务选项
     Button okBtn; //确认选项按钮
 
+    boolean isEnd = false;    //判断游戏是否结束
+    boolean isSuccess = false; //判断是否通过
+    boolean isConflict = false; //是否撞
+
+    int screenHeight;         //屏幕宽度
+    int screenWidth;          //屏幕高度
+
+    myObj obj;                //声明对象
+    private int xobj = 60;      //对象x坐标
+    private int yobj = 500;      //对象y坐标
+    int height1, height2;      //柱子高度
+
+    TextView tv;//游戏结果提示
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_view);
+
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        screenWidth = wm.getDefaultDisplay().getWidth();
+        screenHeight = wm.getDefaultDisplay().getHeight();                     //获取屏幕宽和高
 
         initGame();
 
@@ -66,6 +92,9 @@ public class learnVar extends Activity {
         tvScore = (TextView)findViewById(R.id.score);
         String res = String.valueOf(readFile("score.txt"));
         tvScore.setText(res);
+
+        //游戏结果提示
+        tv  = (TextView)findViewById(R.id.gameState);
 
         //设置任务要求按钮
         taskBtn = (Button)findViewById(R.id.createBtn);
@@ -116,18 +145,119 @@ public class learnVar extends Activity {
             }
         });
 
+        //"重来"按钮
+        Button retry = (Button)findViewById(R.id.retry);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());    //重启当前activity
+            }
+        });
+
 
     }
 
     //选项正确，开始游戏
     public void gameStart(){
-        myObj obj = new myObj(learnVar.this);
+        obj = new myObj(learnVar.this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1,-1);
         addContentView(obj,layoutParams);     //在游戏view中添加移动对象
+
+        myGameView v = (myGameView)findViewById(R.id.myGameView);
+        v.setOnTouchListener(touch);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(yobj>=screenHeight-180||yobj<=0||(xobj>=500&&xobj<=780&&yobj<=height1+50)||(xobj>=1100&&xobj<=1230&&yobj>=height2+550-20)) {
+                    isEnd = true;
+                    isConflict = true;      //撞而失败
+                    handler.sendEmptyMessage(0x123);
+                    //System.out.println("game_end");
+                }
+                else if(xobj>screenWidth-480&&yobj<screenHeight/2){
+                    isEnd = true;
+                    isSuccess = true;     //成功！
+                    handler.sendEmptyMessage(0x123);
+                }
+                else if((xobj>screenWidth-480&&yobj>=screenHeight/2)){
+                    isEnd = true;          //选择错误而失败
+                    handler.sendEmptyMessage(0x123);
+                }
+                else{
+                    xobj += 3;
+                    yobj += 3;
+                    handler.sendEmptyMessage(0x123); //通知重绘小球
+                }
+            }
+        },0,15);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+              height1 = getRandomH();
+              height2 = getRandomH();
+            }
+        },0,220);
     }
 
+    public int getRandomH() {
+        final double d = Math.random(); //返回的是0(包含)到1(不包含)之间的double值
+        final int i = (int) (d * 350);
+        return i;
+    }
+
+    //设置触屏响应
+    View.OnTouchListener touch = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    if(yobj>=screenHeight-180||yobj<=0||(xobj>=500&&xobj<=780&&yobj<=height1+50)||(xobj>=1100&&xobj<=1230&&yobj>=height2+550-20))
+                    {
+                        isEnd = true;
+                        isConflict = true;
+                        handler.sendEmptyMessage(0x123);
+                        break;
+                    }else if(xobj>=screenWidth-480&&yobj<screenHeight/2){
+                        isEnd = true;
+                        isSuccess = true;
+                        handler.sendEmptyMessage(0x123);
+                        break;
+                    }
+                    else if(xobj>screenWidth-480&&yobj>=screenHeight/2){
+                        isEnd = true;
+                        handler.sendEmptyMessage(0x123);
+                    }
+                    else{
+                        yobj -= 50;
+                        handler.sendEmptyMessage(0x123);
+                        break;
+                    }
+            }
+            return true;
+        }
+    };
+
+    //通知重绘
+    Handler handler = new Handler(){
+        @SuppressLint("HandlerLeak")
+        @Override
+        public void handleMessage(Message msg){
+            super.handleMessage(msg);
+            if(msg.what == 0x123){
+                obj.invalidate();
+            }
+        }
+    };
+
+
+
     //内部类中设置移动对象
-    class myObj extends View{
+    class myObj extends View {
+
+
 
         public myObj(Context context) {
             super(context);
@@ -138,6 +268,7 @@ public class learnVar extends Activity {
         }
 
         Paint paint = new Paint();
+
         public void onDraw(Canvas canvas) {
             //paint画笔的属性必须在onDraw中设定？
             paint.setStyle(Paint.Style.FILL);
@@ -146,23 +277,59 @@ public class learnVar extends Activity {
             paint.setTextSize(200);
 
             //test obj
-            canvas.drawText("hello",60,200,paint);
+            canvas.drawText("hello", 60, 200, paint);
+            paint.setColor(Color.parseColor("#974CAF50"));
+            //height1 = getRandomH();
+            //height2 = getRandomH();
+            //System.out.println("hello" + height1 + " " + height2);
+            canvas.drawRect(700, 0, 760, height1 + 150, paint);
+            canvas.drawRect(1200, height2 + 550, 1260, 1080, paint);
 
             Bitmap birdPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
             int width = birdPic.getWidth();
             int height = birdPic.getHeight();
-            Matrix matrix=new Matrix();
+            Matrix matrix = new Matrix();
             matrix.postScale(0.35f, 0.35f);//获取缩放比例
-            Bitmap birdbmp = Bitmap.createBitmap(birdPic,0,0,
-                    width,height,matrix,true);//根据缩放比例获取新的位图
+            Bitmap birdbmp = Bitmap.createBitmap(birdPic, 0, 0,
+                    width, height, matrix, true);//根据缩放比例获取新的位图
 
             Bitmap varPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.var);
             int vwidth = varPic.getWidth();
             int vheight = varPic.getHeight();
             matrix.postScale(0.4f, 0.4f);//获取缩放比例
-            Bitmap varbmp = Bitmap.createBitmap(varPic,0,0,
-                    vwidth,vheight,matrix,true);//根据缩放比例获取新的位图
+            Bitmap varbmp = Bitmap.createBitmap(varPic, 0, 0,
+                    vwidth, vheight, matrix, true);//根据缩放比例获取新的位图
 
+            if (!isEnd) {
+                //canvas.drawCircle(xobj+185, yobj+90, 35, paint);
+                canvas.drawBitmap(varbmp, xobj + 160, yobj + 65, paint);
+                canvas.drawBitmap(birdbmp, xobj, yobj, paint);
+            } else if (isEnd && isConflict && !isSuccess) {
+                //canvas.drawText("游戏结束", screenWidth / 2, screenHeight / 2, paint);
+                tv.setText("游戏失败！");
+                cardView1.setVisibility(View.VISIBLE);
+            } else if (isEnd && !isConflict && !isSuccess) {
+                cardView1.setVisibility(View.VISIBLE);
+            } else {
+                tv.setText("游戏成功" +
+                    "\n输出:6");
+                cardView1.setVisibility(View.VISIBLE);
+                //int i = Integer.valueOf(String.valueOf(tvScore.getText())).intValue();
+                int j = Integer.valueOf(String.valueOf(readFile("score.txt")));
+                if (j < 0) {
+                    /**              //废弃功能
+                     SharedPreferences.Editor editor = score.edit();
+                     int temp = Integer.valueOf(String.valueOf(tvScore.getText())).intValue() + 10;
+                     editor.putString(gameScore, temp + "");
+                     editor.commit();
+                     **/
+                    //测试积分文件存取
+                    //settingActivity changeScore = new settingActivity();
+                    //changeScore.writeFile("score.txt","10");
+                    writeFile("score.txt", "30");
+                }
+
+            }
         }
     }
 

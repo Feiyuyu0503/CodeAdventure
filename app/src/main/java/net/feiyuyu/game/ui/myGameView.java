@@ -94,7 +94,7 @@ public class myGameView extends View {
         canvas.drawText("void main(){",width-340,height/4*3-80,paint);
         canvas.drawText("____;",width-340,height/4*3-40,paint);
         canvas.drawText("var++;",width-340,height/4*3+30,paint);
-        canvas.drawText("cout<<var<<endl;",width-310,height/4*3+80,paint);
+        canvas.drawText("cout<<var<<endl;",width-340,height/4*3+80,paint);
         canvas.drawText("}",width-340,height/4*3+120,paint);
 
         //view也是控件吗？view中加不了其他控件？在xml文件中可并列叠加控件

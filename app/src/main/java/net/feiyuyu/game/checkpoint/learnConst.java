@@ -50,8 +50,8 @@ import java.util.TimerTask;
 
 public class learnConst extends Activity {
     private myObj obj;
-    private int xobj = 60;      //小球x坐标
-    private int yobj = 500;      //小球y坐标
+    private int xobj = 60;      //对象x坐标
+    private int yobj = 500;      //对象y坐标
 
     int screenHeight;         //屏幕宽度
     int screenWidth;          //屏幕高度
@@ -295,6 +295,7 @@ public class learnConst extends Activity {
             else if(isEnd&&isConflict&&!isSuccess){
                 //canvas.drawText("游戏结束", screenWidth / 2, screenHeight / 2, paint);
                 tv.setText("游戏失败！");
+                cardView1.setVisibility(View.VISIBLE);
                 cardView1.setVisibility(View.VISIBLE);
             }
             else if(isEnd&&!isConflict&&!isSuccess){
