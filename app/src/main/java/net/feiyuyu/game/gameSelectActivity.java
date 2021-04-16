@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import net.feiyuyu.game.checkpoint.chooseConst;
 import net.feiyuyu.game.checkpoint.learnConst;
 import net.feiyuyu.game.checkpoint.learnVar;
 
@@ -28,10 +29,15 @@ public class gameSelectActivity extends Activity {
         btn1 = (Button) findViewById(R.id.game0);
         btn2 = (Button) findViewById(R.id.game1);
 
+        //System.out.println("here is selecting: "+Configuration.cp1);
+        //test
+        //btn1.setText(Configuration.cp1+"");
+        //btn2.setText(Configuration.cp2+"");
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(gameSelectActivity.this, learnConst.class);
+                Intent intent = new Intent(gameSelectActivity.this, chooseConst.class);
                 startActivity(intent);
             }
         });
@@ -39,7 +45,7 @@ public class gameSelectActivity extends Activity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(gameSelectActivity.this, learnVar.class);
+                Intent intent = new Intent(gameSelectActivity.this, learnConst.class);
                 startActivity(intent);
             }
         });

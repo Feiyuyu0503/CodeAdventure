@@ -20,6 +20,7 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -75,6 +76,14 @@ public class learnConst extends Activity {
 
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
+
+        //去除标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //去除状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.choose_game_view);
+
         setContentView(R.layout.game_view);
 
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);

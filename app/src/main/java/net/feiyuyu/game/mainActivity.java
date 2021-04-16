@@ -50,6 +50,7 @@ public class mainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent=new Intent(mainActivity.this,settingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -59,6 +60,7 @@ public class mainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(mainActivity.this,gameSelectActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
