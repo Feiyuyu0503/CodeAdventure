@@ -5,34 +5,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mountain">
+    android:background="@drawable/mountain"
+    tools:ignore="MissingDefaultResource">
 
     <ImageButton
         android:id="@+id/varBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitCenter">
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        tools:ignore="MissingConstraints">
     </ImageButton>
     <ImageButton
         android:id="@+id/varBtn1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitCenter">
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        tools:ignore="MissingConstraints">
     </ImageButton>
 
     <ImageButton
         android:id="@+id/constBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/apple"
-        android:scaleType="fitCenter">
+        android:scaleType="fitCenter"
+        tools:ignore="MissingConstraints">
     </ImageButton>
     <ImageButton
         android:id="@+id/constBtn1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/watermelon"
-        android:scaleType="fitCenter">
+        android:scaleType="fitCenter"
+        tools:ignore="MissingConstraints">
     </ImageButton>
 
 
@@ -42,7 +47,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/font18"
         android:text="Score:"
-        android:textSize="24sp"></TextView>
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"></TextView>
 
     <TextView
         android:id="@+id/score"
@@ -53,7 +59,8 @@
         android:text="0"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/scoreShow"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
     </TextView>
 
     <androidx.cardview.widget.CardView

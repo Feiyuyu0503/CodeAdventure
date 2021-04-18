@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="#974CAF50"
+    tools:ignore="MissingDefaultResource"
+    >
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                  android:id="@+id/actionBtn"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:text="动作列表"
+                  android:fontFamily="@font/font18"
+                  android:textSize="18dp">
+            </Button>
+            <Button
+                android:id="@+id/execBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="执行"
+                android:textSize="18dp"
+                android:fontFamily="@font/font18"
+                android:layout_marginLeft="200dp">
+            </Button>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="400dp"
+            android:layout_height="fill_parent"
+            >
+
+              <androidx.cardview.widget.CardView
+                  android:id="@+id/cv"
+                  android:layout_width="250dp"
+                  android:layout_height="300dp"
+                  android:layout_gravity="center_horizontal|center_vertical"
+                  app:cardCornerRadius="12dp"
+                  app:cardElevation="12dp"
+                  android:background="@color/purple_200"
+                  app:cardBackgroundColor="#00BCD4"
+                  android:visibility="gone"
+                  >
+
+                  <TextView
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:text="向左"
+                      android:textSize="18dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:background="@color/teal_700"
+                      android:layout_marginLeft="50dp"
+                      android:layout_marginTop="50dp">
+                  </TextView>
+
+                  <TextView
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:text="向上"
+                      android:textSize="18dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:background="@color/teal_700"
+                      android:layout_marginLeft="50dp"
+                      android:layout_marginTop="100dp">
+                  </TextView>
+
+                  <TextView
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:text="向右"
+                      android:textSize="18dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:background="@color/teal_700"
+                      android:layout_marginLeft="50dp"
+                      android:layout_marginTop="150dp">
+                  </TextView>
+
+                  <TextView
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:text="向下"
+                      android:textSize="18dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:background="@color/teal_700"
+                      android:layout_marginLeft="50dp"
+                      android:layout_marginTop="200dp">
+                  </TextView>
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="x"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="100dp"
+                      android:layout_marginTop="55dp">
+                  </TextView>
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="x"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="100dp"
+                      android:layout_marginTop="105dp">
+                  </TextView>
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="x"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="100dp"
+                      android:layout_marginTop="155dp">
+                  </TextView>
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="x"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="100dp"
+                      android:layout_marginTop="205dp">
+                  </TextView>
+
+                  <TextView
+                      android:id="@+id/numOfLeft"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="0"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="130dp"
+                      android:layout_marginTop="55dp">
+                  </TextView>
+
+                  <TextView
+                      android:id="@+id/numOfUp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="0"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="130dp"
+                      android:layout_marginTop="105dp">
+                  </TextView>
+
+                  <TextView
+                      android:id="@+id/numOfRight"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="0"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="130dp"
+                      android:layout_marginTop="155dp">
+                  </TextView>
+                  <TextView
+                      android:id="@+id/numOfDown"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="0"
+                      android:textSize="24dp"
+                      android:gravity="center"
+                      android:fontFamily="@font/font18"
+                      android:layout_marginLeft="130dp"
+                      android:layout_marginTop="205dp">
+                  </TextView>
+
+                  <ImageButton
+                      android:id="@+id/addLeftBtn"
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:src="@drawable/add"
+                      android:background="#00BCD4"
+                      android:layout_marginLeft="160dp"
+                      android:layout_marginTop="45dp">
+                  </ImageButton>
+                  <ImageButton
+                      android:id="@+id/addUpBtn"
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:src="@drawable/add"
+                      android:background="#00BCD4"
+                      android:layout_marginLeft="160dp"
+                      android:layout_marginTop="100dp">
+                  </ImageButton>
+                  <ImageButton
+                      android:id="@+id/addRightBtn"
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:src="@drawable/add"
+                      android:background="#00BCD4"
+                      android:layout_marginLeft="160dp"
+                      android:layout_marginTop="150dp">
+                  </ImageButton>
+                  <ImageButton
+                      android:id="@+id/addDownBtn"
+                      android:layout_width="40dp"
+                      android:layout_height="40dp"
+                      android:src="@drawable/add"
+                      android:background="#00BCD4"
+                      android:layout_marginLeft="160dp"
+                      android:layout_marginTop="200dp">
+                  </ImageButton>
+
+                  <Button
+                      android:id="@+id/saveBtn"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="确认"
+                      android:fontFamily="@font/font18"
+                      android:textSize="18dp"
+                      android:layout_gravity="bottom|center"
+                      android:layout_marginBottom="10dp">
+                  </Button>
+
+
+
+              </androidx.cardview.widget.CardView>
+
+              <net.feiyuyu.game.ui.mapViewLayout
+                  android:id="@+id/grid2"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginTop="50dp">
+              </net.feiyuyu.game.ui.mapViewLayout>
+
+          </FrameLayout>
+    </LinearLayout>
+
+    <net.feiyuyu.game.ui.mapViewLayout
+        android:id="@+id/grid1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    </net.feiyuyu.game.ui.mapViewLayout>
+
+
+</LinearLayout>

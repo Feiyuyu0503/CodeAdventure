@@ -67,6 +67,8 @@ public class  learnVar extends Activity {
 
     TextView tv;//游戏结果提示
 
+    boolean randomVar = false;    //随机变量或常量,默认false代表常量关卡
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_view);
@@ -75,11 +77,20 @@ public class  learnVar extends Activity {
         screenWidth = wm.getDefaultDisplay().getWidth();
         screenHeight = wm.getDefaultDisplay().getHeight();                     //获取屏幕宽和高
 
-        initGame();
-
+        //游戏结果提示
+        tv  = (TextView)findViewById(R.id.gameState);
+        if((Math.random()*2)>1) {
+            randomVar = true; //变量关卡
+            //飞去常量代码块
+            tv.setText("飞错啦！");
+        }
+        System.out.println("hello: "+randomVar);
+        initNewGame( randomVar );
     }
 
-    public void initGame(){
+    //废弃
+    /**
+    public void initGame(boolean randomVar){
         //隐藏任务要求显示框，并重新设置任务内容
         cardView = (View)findViewById(R.id.card);
         cardView1 = (View)findViewById(R.id.card1);
@@ -128,7 +139,7 @@ public class  learnVar extends Activity {
             public void onClick(View v) {
                 if(isCorrect){
                     cardView.setVisibility(View.GONE);
-                    gameStart();
+                    gameStart(randomVar);
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(learnVar.this);
                     builder.setTitle("提示");
@@ -157,10 +168,45 @@ public class  learnVar extends Activity {
 
 
     }
+     **/
+
+    public void initNewGame(boolean randomVar){
+        //隐藏任务要求显示框，并重新设置任务内容
+        cardView = (View)findViewById(R.id.card);
+        cardView1 = (View)findViewById(R.id.card1);
+        cardView.setVisibility(View.GONE);
+        cardView1.setVisibility(View.GONE);
+        taskContent = (TextView)findViewById(R.id.taskContent);
+        taskContent.setText("声明一个变量");
+
+        //设置积分
+        tvScore = (TextView)findViewById(R.id.score);
+        String res = String.valueOf(readFile("score.txt"));
+        tvScore.setText(res);
+
+        //游戏结果提示
+        //tv  = (TextView)findViewById(R.id.gameState);
+
+        //设置任务要求按钮
+        taskBtn = (Button)findViewById(R.id.createBtn);
+
+
+        //"重来"按钮
+        Button retry = (Button)findViewById(R.id.retry);
+        retry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());    //重启当前activity
+            }
+        });
+
+        gameStart(randomVar);
+    }
 
     //选项正确，开始游戏
-    public void gameStart(){
-        obj = new myObj(learnVar.this);
+    public void gameStart(boolean randomVar){
+        obj = new myObj(learnVar.this,randomVar);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1,-1);
         addContentView(obj,layoutParams);     //在游戏view中添加移动对象
 
@@ -170,25 +216,44 @@ public class  learnVar extends Activity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if(yobj>=screenHeight-180||yobj<=0||(xobj>=500&&xobj<=780&&yobj<=height1+50)||(xobj>=1100&&xobj<=1230&&yobj>=height2+550-20)) {
+                if(!randomVar){
+                if (yobj >= screenHeight - 180 || yobj <= 0 || (xobj >= 500 && xobj <= 780 && yobj <= height1 + 50) || (xobj >= 1100 && xobj <= 1230 && yobj >= height2 + 550 - 20)) {
                     isEnd = true;
                     isConflict = true;      //撞而失败
                     handler.sendEmptyMessage(0x123);
                     //System.out.println("game_end");
-                }
-                else if(xobj>screenWidth-480&&yobj<screenHeight/2){
+                } else if (xobj > screenWidth - 480 && yobj < screenHeight / 2) {
                     isEnd = true;
                     isSuccess = true;     //成功！
                     handler.sendEmptyMessage(0x123);
-                }
-                else if((xobj>screenWidth-480&&yobj>=screenHeight/2)){
+                } else if ((xobj > screenWidth - 480 && yobj >= screenHeight / 2)) {
                     isEnd = true;          //选择错误而失败
                     handler.sendEmptyMessage(0x123);
-                }
-                else{
+                } else {
                     xobj += 3;
                     yobj += 3;
                     handler.sendEmptyMessage(0x123); //通知重绘小球
+                }
+            }
+                else{
+                    if (yobj >= screenHeight - 180 || yobj <= 0 || (xobj >= 500 && xobj <= 780 && yobj <= height1 + 50) || (xobj >= 1100 && xobj <= 1230 && yobj >= height2 + 550 - 20)) {
+                        isEnd = true;
+                        isConflict = true;      //撞而失败
+                        handler.sendEmptyMessage(0x123);
+                        //System.out.println("game_end");
+                    } else if (xobj > screenWidth - 480 && yobj < screenHeight / 2) {
+                        isEnd = true;           //选择错误而失败
+                        //isSuccess = true;     //成功！
+                        handler.sendEmptyMessage(0x123);
+                    } else if ((xobj > screenWidth - 480 && yobj >= screenHeight / 2)) {
+                        isEnd = true;
+                        isSuccess = true;     //成功！
+                        handler.sendEmptyMessage(0x123);
+                    } else {
+                        xobj += 3;
+                        yobj += 3;
+                        handler.sendEmptyMessage(0x123); //通知重绘小球
+                    }
                 }
             }
         },0,15);
@@ -257,10 +322,11 @@ public class  learnVar extends Activity {
     //内部类中设置移动对象
     class myObj extends View {
 
+        private boolean random;
 
-
-        public myObj(Context context) {
+        public myObj(Context context,boolean random) {
             super(context);
+            this.random = random;
         }
 
         public myObj(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -275,6 +341,9 @@ public class  learnVar extends Activity {
             paint.setAntiAlias(true);
             paint.setColor(Color.RED);
             paint.setTextSize(200);
+
+            //test
+            //System.out.println("hello: "+ random);
 
             //test obj
             canvas.drawText("hello", 60, 200, paint);
@@ -293,23 +362,35 @@ public class  learnVar extends Activity {
             Bitmap birdbmp = Bitmap.createBitmap(birdPic, 0, 0,
                     width, height, matrix, true);//根据缩放比例获取新的位图
 
-            Bitmap varPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.var);
+            //代表变量
+            Bitmap varPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.cube);
             int vwidth = varPic.getWidth();
             int vheight = varPic.getHeight();
             matrix.postScale(0.4f, 0.4f);//获取缩放比例
             Bitmap varbmp = Bitmap.createBitmap(varPic, 0, 0,
                     vwidth, vheight, matrix, true);//根据缩放比例获取新的位图
 
+            //代表常量
+            Bitmap ConstvarPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.apple);
+            vwidth = ConstvarPic.getWidth();
+            vheight = ConstvarPic.getHeight();
+            matrix.postScale(1f, 1f);//获取缩放比例
+            Bitmap Constvarbmp = Bitmap.createBitmap(ConstvarPic, 0, 0,
+                    vwidth, vheight, matrix, true);//根据缩放比例获取新的位图
+
+
             if (!isEnd) {
                 //canvas.drawCircle(xobj+185, yobj+90, 35, paint);
+                if(random)
                 canvas.drawBitmap(varbmp, xobj + 160, yobj + 65, paint);
+                else canvas.drawBitmap(Constvarbmp, xobj + 160, yobj + 55, paint);
                 canvas.drawBitmap(birdbmp, xobj, yobj, paint);
             } else if (isEnd && isConflict && !isSuccess) {
                 //canvas.drawText("游戏结束", screenWidth / 2, screenHeight / 2, paint);
-                tv.setText("游戏失败！");
+                tv.setText("游戏失败！");             //撞而失败
                 cardView1.setVisibility(View.VISIBLE);
             } else if (isEnd && !isConflict && !isSuccess) {
-                cardView1.setVisibility(View.VISIBLE);
+                cardView1.setVisibility(View.VISIBLE);     //选择错误而失败
             } else {
                 tv.setText("游戏成功" +
                     "\n输出:6");

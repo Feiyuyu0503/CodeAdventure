@@ -71,7 +71,6 @@ public class chooseConst extends Activity {
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         screenWidth = wm.getDefaultDisplay().getWidth();
         screenHeight = wm.getDefaultDisplay().getHeight();                     //获取屏幕宽和高
-        System.out.println("screen"+screenWidth+" "+screenHeight);
 
         //游戏成功提示
         tip = (CardView) findViewById(R.id.tipCard);
@@ -81,7 +80,7 @@ public class chooseConst extends Activity {
             @Override
             public void onClick(View v) {
                 //temp dev test
-                delScore(200);
+                delScore(100);
                 startActivity(getIntent());
                 finish();
             }
@@ -91,7 +90,7 @@ public class chooseConst extends Activity {
         nextCp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(chooseConst.this, learnConst.class);
+                Intent intent = new Intent(chooseConst.this, chooseVar.class);
                 startActivity(intent);
                 finish();
             }
@@ -269,7 +268,7 @@ public class chooseConst extends Activity {
 
     public boolean isSuccess(){
         String res = readFile("score.txt");
-        if(Integer.valueOf(res)>=300) {
+        if(Integer.valueOf(res)>=100) {
             //Configuration.cp1 = 1;
             isSuccess = true;
             return true;
