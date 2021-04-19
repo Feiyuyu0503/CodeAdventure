@@ -26,7 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class learnArray extends Activity {
+public class learnArrayPro extends Activity {
 
     int screenHeight;         //屏幕宽度
     int screenWidth;          //屏幕高度
@@ -94,9 +94,9 @@ public class learnArray extends Activity {
                 int i = Integer.valueOf(res)+1;
                 if(i>4){
                     tvLeft.setText("0");
-                    Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(learnArrayPro.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvLeft.setText(i+"");
+                    tvLeft.setText(i+"");
             }
         });
 
@@ -108,9 +108,9 @@ public class learnArray extends Activity {
                 int i = Integer.valueOf(res)+1;
                 if(i>4){
                     tvUp.setText("0");
-                    Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(learnArrayPro.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvUp.setText(i+"");
+                    tvUp.setText(i+"");
             }
         });
 
@@ -122,9 +122,9 @@ public class learnArray extends Activity {
                 int i = Integer.valueOf(res)+1;
                 if(i>4){
                     tvRight.setText("0");
-                    Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(learnArrayPro.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvRight.setText(i+"");
+                    tvRight.setText(i+"");
             }
         });
 
@@ -136,16 +136,16 @@ public class learnArray extends Activity {
                 int i = Integer.valueOf(res)+1;
                 if(i>4){
                     tvDown.setText("0");
-                    Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(learnArrayPro.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvDown.setText(i+"");
+                    tvDown.setText(i+"");
             }
         });
 
 
 
         mapViewLayout1 = (mapViewLayout) findViewById(R.id.grid1);
-        mapViewLayout1.addCubeMap(screenHeight/6+20,screenHeight/6+20);
+        mapViewLayout1.addCubeMapPro(screenHeight/6+20,screenHeight/6+20);
 
 
         mapViewLayout2 = (mapViewLayout)findViewById(R.id.grid2);
@@ -172,14 +172,14 @@ public class learnArray extends Activity {
                             int temp = mapViewLayout1.returnPosition(x,y);   //找到鸟的位置
                             x = temp/10;
                             y = temp%10;
-                                try {
-                                    isSuccess = mapViewLayout1.move(x, y, "left", leftNum);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                            try {
+                                isSuccess = mapViewLayout1.move(x, y, "left", leftNum);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             count--;
                             if(count<=0) isSuccess();
-                            }
+                        }
                     });
                 }
                 if(upNum>0) {
@@ -214,11 +214,11 @@ public class learnArray extends Activity {
                             int temp = mapViewLayout1.returnPosition(x,y);   //找到鸟的位置
                             x = temp/10;
                             y = temp%10;
-                                try {
-                                    isSuccess = mapViewLayout1.move(x, y, "right", rightNum);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                            try {
+                                isSuccess = mapViewLayout1.move(x, y, "right", rightNum);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             count--;
                             if(count<=0) isSuccess();
 
@@ -333,7 +333,7 @@ public class learnArray extends Activity {
                     finish();
                     startActivity(getIntent());    //重启当前activity
                 }else{
-                    Intent intent = new Intent(learnArray.this, learnArrayPro.class);
+                    Intent intent = new Intent(learnArrayPro.this, learnArrayPro.class);
                     startActivity(intent);
                     finish();
                 }

@@ -51,7 +51,7 @@
                 android:layout_marginTop="40dp"
                 android:background="#974CAF50"
                 android:fontFamily="@font/font18"
-                android:text="认识\n数组"
+                android:text="常/变量\n综合"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginTop="40dp"
                 android:background="#974CAF50"
                 android:fontFamily="@font/font18"
-                android:text="认识\n引用"
+                android:text="认识\n数组"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
@@ -75,7 +75,7 @@
                 android:layout_marginTop="40dp"
                 android:background="#974CAF50"
                 android:fontFamily="@font/font18"
-                android:text="认识\n指针"
+                android:text="认识\n数组II"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
             />

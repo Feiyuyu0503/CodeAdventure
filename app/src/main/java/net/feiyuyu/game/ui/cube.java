@@ -20,6 +20,10 @@ public class cube extends FrameLayout {
     TextView tv;
     ImageView imgV;
     int bgColor;
+    boolean isSuccess = false;
+    boolean flag = false; //标记鸟所在位置
+    boolean isCube = false; //标记不能走的方块，true代表不能走
+    public Button btn; //执行按钮
 
     public cube(@NonNull Context context) {
         super(context);
@@ -27,7 +31,8 @@ public class cube extends FrameLayout {
         tv = new TextView(getContext());
         tv.setTextSize(16);
         //tv.setBackgroundColor(Color.parseColor("974CAF50"));
-        tv.setBackgroundColor(0x33fA52ff);
+        //tv.setBackgroundColor(0x33fA52ff);
+        tv.setBackgroundColor(0xFF6A5ACD);
         tv.setGravity(Gravity.CENTER);
         LayoutParams lp = new LayoutParams(-1,-1);
         lp.setMargins(10,10,0,0);
@@ -60,6 +65,7 @@ public class cube extends FrameLayout {
 
     public void setColor(int i){
         this.bgColor = i;
+        this.isCube = true;
         tv.setBackgroundColor(bgColor);
     }
 
@@ -73,8 +79,18 @@ public class cube extends FrameLayout {
 
     public void removeV(){
         imgV.setImageResource(0);
+        flag = false;
     }
     public void setV(){
         setImage(R.drawable.bird);
+        flag = true;
+    }
+
+    public void setBtn(){
+        btn = new Button(getContext());
+        btn.setText("执行");
+        LayoutParams lp = new LayoutParams(-1,-1);
+        lp.setMargins(0,0,0,0);
+        addView(btn,lp);
     }
 }

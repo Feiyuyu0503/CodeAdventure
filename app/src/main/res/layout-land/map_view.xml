@@ -27,15 +27,24 @@
                   android:fontFamily="@font/font18"
                   android:textSize="18dp">
             </Button>
-            <Button
-                android:id="@+id/execBtn"
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="执行"
-                android:textSize="18dp"
                 android:fontFamily="@font/font18"
-                android:layout_marginLeft="200dp">
-            </Button>
+                android:text="Score"
+                android:textSize="28dp"
+                android:layout_marginLeft="50dp">
+            </TextView>
+            <TextView
+                android:id="@+id/scoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font18"
+                android:textSize="24dp"
+                android:text="0"
+                android:layout_marginLeft="10dp">
+            </TextView>
         </LinearLayout>
 
         <FrameLayout
@@ -250,6 +259,37 @@
                   android:layout_height="match_parent"
                   android:layout_marginTop="50dp">
               </net.feiyuyu.game.ui.mapViewLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv1"
+                android:layout_width="250dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="12dp"
+                android:background="@color/purple_200"
+                app:cardBackgroundColor="#00BCD4"
+                android:visibility="gone"
+                >
+                <TextView
+                    android:id="@+id/gameState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="游戏成功!"
+                    android:fontFamily="@font/font18"
+                    android:textSize="24dp"
+                    android:layout_gravity="center">
+                </TextView>
+
+                <Button
+                    android:id="@+id/retryOrNextBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="下一关"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="30dp">
+                </Button>
+            </androidx.cardview.widget.CardView>
 
           </FrameLayout>
     </LinearLayout>
