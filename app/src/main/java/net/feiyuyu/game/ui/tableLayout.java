@@ -1,6 +1,7 @@
 package net.feiyuyu.game.ui;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -11,6 +12,8 @@ import net.feiyuyu.game.R;
 public class tableLayout extends FrameLayout {
 
     ImageView v;
+    public Button btn;
+    int seq;
     public tableLayout(Context context) {
         super(context);
         initView();
@@ -23,7 +26,7 @@ public class tableLayout extends FrameLayout {
 
     public void initView(){
 
-        Button btn = new Button(getContext());
+        btn = new Button(getContext());
         btn.setText("选择");
         LayoutParams lp = new LayoutParams(-1,-1);
         lp.setMargins(0,0,0,0);
@@ -32,9 +35,18 @@ public class tableLayout extends FrameLayout {
         //addView(v,lp);
     }
 
-    public void addImage(int i ){
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
+    public void addImage(Drawable drawable){
         ImageView v = new ImageView(getContext());
-        v.setImageResource(i);
+        //v.setImageResource(i);
+        v.setImageDrawable(drawable);
         LayoutParams lp = new LayoutParams(-1,-1);
         lp.setMargins(0,0,0,0);
         addView(v,lp);

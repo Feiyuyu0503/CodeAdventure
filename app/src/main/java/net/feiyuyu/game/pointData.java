@@ -14,4 +14,20 @@ public class pointData {
     private String obj;
     @SmartColumn(id=1,name="存放地址")
     private int floor;
+
+    public String getObj() {
+        return obj;
+    }
+
+    public void setObj(String obj) {
+        this.obj = obj;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
 }
