@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
+import android.support.v7.widget.CardView;
 
 import com.bin.david.form.core.SmartTable;     //这个包名才正确
 import com.bin.david.form.core.TableConfig;
@@ -65,8 +65,6 @@ public class learnPoint extends Activity {
         //去除状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.choose_game_view);
-
 
         setContentView(R.layout.point_view);
 
@@ -90,6 +88,7 @@ public class learnPoint extends Activity {
 
         initGame();
     }
+
 
     public void initGame(){
 
@@ -121,7 +120,6 @@ public class learnPoint extends Activity {
 
         table.setData(list);
         table.getConfig().setContentStyle(new FontStyle(80, Color.BLUE));
-
         //为水果图片绑定正确楼层
         for(pointData i :list){
             if(i.getObj()==watermelon.getName()) {
@@ -332,6 +330,25 @@ public class learnPoint extends Activity {
         int sc = Integer.valueOf(res)+i;
         writeFile("score.txt",sc+"");
         scoreTv.setText(sc+"");
+    }
+
+    //再按一次返回键退出
+    private long lastBackPressTime = -1L;
+    public void onBackPressed() {
+        long currentTIme = System.currentTimeMillis();
+        if(lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            // 显示提示信息
+            showBackPressTip();
+            // 记录时间
+            lastBackPressTime = currentTIme;
+        }else{
+            //退出应用
+            System.out.println("exit current activity");
+            finish();
+        }
+    }
+    private void showBackPressTip(){
+        Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
     }
 
     //test i/o stream

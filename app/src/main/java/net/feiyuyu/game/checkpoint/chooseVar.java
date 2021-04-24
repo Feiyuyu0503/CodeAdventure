@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
 
 import net.feiyuyu.game.R;
 
@@ -48,6 +48,7 @@ public class chooseVar extends Activity {
     int a=0,a1=0,va=0,va1=0; //加速度
 
     boolean isSuccess = false; //游戏积分是否达标
+    Timer timer;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -179,7 +180,7 @@ public class chooseVar extends Activity {
     }
 
     public void gameStart(){
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -227,6 +228,7 @@ public class chooseVar extends Activity {
                         varBtn.setX(vx);
                         varBtn.setY(vy);
                         delScore(5);
+                        System.out.println("time out");
                     }
                     if (vy1 >= screenHeight - 150) {
                         vy1 = 0;
@@ -235,6 +237,7 @@ public class chooseVar extends Activity {
                         varBtn1.setX(vx1);
                         varBtn1.setY(vy1);
                         delScore(5);
+                        System.out.println("time out");
                     }
                 }
             }
@@ -261,6 +264,27 @@ public class chooseVar extends Activity {
             return true;
         }else
             return false;
+    }
+
+    //再按一次返回键退出
+    private long lastBackPressTime = -1L;
+    public void onBackPressed() {
+        long currentTIme = System.currentTimeMillis();
+        if(lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            // 显示提示信息
+            showBackPressTip();
+            // 记录时间
+            lastBackPressTime = currentTIme;
+        }else{
+            //退出应用
+            System.out.println("exit current activity");
+            timer.cancel();
+            finish();
+            //System.exit(1);//略粗暴
+        }
+    }
+    private void showBackPressTip(){
+        Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
     }
 
     //test i/o stream

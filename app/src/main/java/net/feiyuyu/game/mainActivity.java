@@ -2,6 +2,8 @@ package net.feiyuyu.game;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 
 import org.apache.http.util.EncodingUtils;
 
@@ -21,6 +24,10 @@ import java.io.IOException;
 public class mainActivity extends Activity {
 
     TextView tv;
+    public static MediaPlayer mp;
+    public boolean sound = true;
+    private SharedPreferences sp;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -28,15 +35,29 @@ public class mainActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main);
 
-        //tv = (TextView)findViewById(R.id.score);
-        //String str = String.valueOf(tv.getText());
-        //System.out.println("tttttttt"+" "+str);
 
-        //settingActivity readScore = new settingActivity();
-
-        File file=new File("/data/data/net.feiyuyu.game/files/score.txt");
+        File file=new File("/data/data/net.feiyuyu.game/files/music.txt");
         if(!file.exists()) {
-            System.out.println("执行了");
+            //System.out.println("执行了");
+            writeFile("music.txt", "true");
+        }
+        mp = MediaPlayer.create(this, R.raw.bg);
+        mp.setLooping(true);
+        //sp = this.getSharedPreferences("config",MODE_PRIVATE);
+        if(String.valueOf(readFile("music.txt")).equals("true")) {
+            mp.start();
+        }else {
+            mp.start();
+            mp.pause();
+        }
+        //if(!sp.getBoolean("sound",true)) {
+        //    sound = false;
+        //}
+
+
+        file=new File("/data/data/net.feiyuyu.game/files/score.txt");
+        if(!file.exists()) {
+            //System.out.println("执行了");
             writeFile("score.txt", "0");
         }
 
@@ -50,7 +71,7 @@ public class mainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent=new Intent(mainActivity.this,settingActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
@@ -60,10 +81,22 @@ public class mainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(mainActivity.this,gameSelectActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
+    }
+
+    //返回activity时更新积分
+    public void onRestart(){
+        super.onRestart();
+        tv.setText(readFile("score.txt"));
+        if(String.valueOf(readFile("music.txt")).equals("true")) {
+            mp.start();
+        }else {
+            mp.start();
+            mp.pause();
+        }
     }
 
     //test i/o stream

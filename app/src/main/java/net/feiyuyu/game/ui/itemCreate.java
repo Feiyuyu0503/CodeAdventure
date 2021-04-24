@@ -1,12 +1,12 @@
 package net.feiyuyu.game.ui;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
 
 import net.feiyuyu.game.R;
 

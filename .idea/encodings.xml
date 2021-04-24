@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/GameConf.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/GameService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/GameServiceImpl.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/ImageUtil.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/LinkInfo.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/myfirstapp/GameConf.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/myfirstapp/GameService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/myfirstapp/GameServiceImpl.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/myfirstapp/ImageUtil.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnRef/myfirstapp/LinkInfo.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnReference/GameConf.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnReference/GameService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnReference/GameServiceImpl.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnReference/ImageUtil.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/net/feiyuyu/game/checkpoint/learnReference/LinkInfo.java" charset="GBK" />
+  </component>
+</project>

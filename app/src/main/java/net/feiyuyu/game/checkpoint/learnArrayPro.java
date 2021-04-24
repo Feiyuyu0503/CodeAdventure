@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
+
 
 import net.feiyuyu.game.R;
 import net.feiyuyu.game.ui.mapViewLayout;
@@ -60,7 +61,6 @@ public class learnArrayPro extends Activity {
         //去除状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.choose_game_view);
 
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         screenWidth = wm.getDefaultDisplay().getWidth();
@@ -357,6 +357,25 @@ public class learnArrayPro extends Activity {
             retryOrNextBtn.setText("重玩");
             cv1.setVisibility(View.VISIBLE);
         }
+    }
+
+    //再按一次返回键退出
+    private long lastBackPressTime = -1L;
+    public void onBackPressed() {
+        long currentTIme = System.currentTimeMillis();
+        if(lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            // 显示提示信息
+            showBackPressTip();
+            // 记录时间
+            lastBackPressTime = currentTIme;
+        }else{
+            //退出应用
+            System.out.println("exit current activity");
+            finish();
+        }
+    }
+    private void showBackPressTip(){
+        Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
     }
 
     //test i/o stream

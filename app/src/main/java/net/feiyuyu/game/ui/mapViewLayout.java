@@ -1,6 +1,7 @@
 package net.feiyuyu.game.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -57,7 +58,7 @@ public class mapViewLayout extends GridLayout {
                 c.setV();
             if(y>0&&x!=4)
                 //c.setColor(0xFF6A5ACD);
-                c.setColor(0x33fA52ff);
+                c.setColor(Color.GRAY);
             addView(c,cubeWidth,cubeHeight);
             cubeMap[y][x] = c;
         }
@@ -98,11 +99,11 @@ public class mapViewLayout extends GridLayout {
             for(int y=0;y<5;y++){
                 c = new cube(getContext());
                 if(x==1&&(y==1||y==3))
-                    c.setColor(0x33fA52ff);
+                    c.setColor(Color.GRAY);
                 if(x==3&&y==2)
-                    c.setColor(0x33fA52ff);
+                    c.setColor(Color.GRAY);
                 if(x==4&&y==3)
-                    c.setColor(0x33fA52ff);
+                    c.setColor(Color.GRAY);
                 if(x==4&&y==2)
                     c.setV();
                 if(x==4&&y==4) {

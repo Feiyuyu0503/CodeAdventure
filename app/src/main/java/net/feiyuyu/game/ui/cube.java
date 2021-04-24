@@ -2,6 +2,8 @@ package net.feiyuyu.game.ui;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.Button;
@@ -9,9 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.feiyuyu.game.R;
 

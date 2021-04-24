@@ -17,6 +17,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,9 +30,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import net.feiyuyu.game.R;
 import net.feiyuyu.game.gameSelectActivity;
@@ -330,6 +328,25 @@ public class learnConst extends Activity {
                 }
             }
         }
+    }
+
+    //再按一次返回键退出
+    private long lastBackPressTime = -1L;
+    public void onBackPressed() {
+        long currentTIme = System.currentTimeMillis();
+        if(lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            // 显示提示信息
+            showBackPressTip();
+            // 记录时间
+            lastBackPressTime = currentTIme;
+        }else{
+            //退出应用
+            System.out.println("exit current activity");
+            finish();
+        }
+    }
+    private void showBackPressTip(){
+        Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
     }
 
     //test i/o stream

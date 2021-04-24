@@ -8,6 +8,8 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.Window;
@@ -18,8 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 
 import net.feiyuyu.game.Configuration;
 import net.feiyuyu.game.R;
@@ -57,6 +57,8 @@ public class chooseConst extends Activity {
     CardView tip;    //游戏成功提示
     Button retry;
     Button nextCp;
+
+    Timer timer;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -191,7 +193,7 @@ public class chooseConst extends Activity {
 
     public void gameStart(){
 
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -341,6 +343,26 @@ public class chooseConst extends Activity {
             //constBtn.setY(y++);
 
         }
+    }
+
+    //再按一次返回键退出
+    private long lastBackPressTime = -1L;
+    public void onBackPressed() {
+        long currentTIme = System.currentTimeMillis();
+        if(lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            // 显示提示信息
+            showBackPressTip();
+            // 记录时间
+            lastBackPressTime = currentTIme;
+        }else{
+            //退出应用
+            System.out.println("exit current activity");
+            timer.cancel();
+            finish();
+        }
+    }
+    private void showBackPressTip(){
+        Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
     }
 
     //test i/o stream

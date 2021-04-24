@@ -83,6 +83,13 @@
             android:name=".checkpoint.learnPoint"
             android:label="学习指针">
         </activity>
+
+        <activity
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".checkpoint.learnReference.learnReferenceActivity"
+            android:label="学习引用">
+        </activity>
    </application>
 
 </manifest>

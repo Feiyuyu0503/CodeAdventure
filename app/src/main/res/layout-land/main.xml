@@ -5,8 +5,8 @@
     android:id="@+id/game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#974CAF50"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg1">
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import net.feiyuyu.game.checkpoint.learnArray;
 import net.feiyuyu.game.checkpoint.learnArrayPro;
 import net.feiyuyu.game.checkpoint.learnConst;
 import net.feiyuyu.game.checkpoint.learnPoint;
+import net.feiyuyu.game.checkpoint.learnReference.learnReferenceActivity;
 import net.feiyuyu.game.checkpoint.learnVar;
 
 public class gameSelectActivity extends Activity {
@@ -24,6 +25,8 @@ public class gameSelectActivity extends Activity {
     Button btn4;
     Button btn5;
     Button btn6;
+    Button btn7;
+
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -38,6 +41,7 @@ public class gameSelectActivity extends Activity {
         btn4 = (Button) findViewById(R.id.game3);
         btn5 = (Button) findViewById(R.id.game4);
         btn6 = (Button) findViewById(R.id.game5);
+        btn7 = (Button) findViewById(R.id.game6);
 
         //System.out.println("here is selecting: "+Configuration.cp1);
         //test
@@ -88,6 +92,14 @@ public class gameSelectActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(gameSelectActivity.this, learnPoint.class);
+                startActivity(intent);
+            }
+        });
+
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(gameSelectActivity.this, learnReferenceActivity.class);
                 startActivity(intent);
             }
         });

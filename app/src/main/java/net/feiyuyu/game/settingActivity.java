@@ -2,6 +2,7 @@ package net.feiyuyu.game;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+
 import org.apache.http.util.EncodingUtils;
 
 import java.io.FileInputStream;
@@ -26,6 +28,7 @@ import java.util.HashMap;
 
 public class settingActivity extends Activity implements OnClickListener {
 
+    Button backBtn;
     MediaPlayer music;
     SoundPool soundPool;
     Switch musicOn;
@@ -42,12 +45,32 @@ public class settingActivity extends Activity implements OnClickListener {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        initSounds();
+
+        //initSounds();
         setContentView(R.layout.setting);
+        music = mainActivity.mp;
         musicOn = (Switch) this.findViewById((R.id.musicBtn));
         musicOn.setOnClickListener(this);
+        if(readFile("music.txt").equals("true")) {
+            musicOn.setChecked(true);
+            music.start();
+        }else{
+            musicOn.setChecked(false);
+            music.pause();
+        }
 
-        writeFile("a.txt","你好");
+        backBtn = (Button)findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                music.pause();
+                //Intent intent = new Intent(settingActivity.this,mainActivity.class);
+                //startActivity(intent);
+                finish();
+            }
+        });
+
+        //writeFile("a.txt","你好");
         //TextView tv = findViewById(R.id.userName);
         //tv.setText(readFile("a.txt"));
 
@@ -79,24 +102,33 @@ public class settingActivity extends Activity implements OnClickListener {
     }
 
 
-    public void initSounds(){
-        music = MediaPlayer.create(this,R.raw.aigei_com);
-        soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,100);
-        soundPoolMap = new HashMap<Integer, Integer>();
-        soundPoolMap.put(1,soundPool.load(this,R.raw.aigei_com,1));
-    }
+   // public void initSounds(){
+   //     music = MediaPlayer.create(this,R.raw.aigei_com);
+   //     soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,100);
+   //     soundPoolMap = new HashMap<Integer, Integer>();
+   //     soundPoolMap.put(1,soundPool.load(this,R.raw.aigei_com,1));
+   // }
+//
+   // public void playSound(int sound,int loop){
+   //     AudioManager mgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+   //     float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+   //     float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+   //     float volume = streamVolumeCurrent/streamVolumeMax;
+   //     soundPool.play(1,volume,volume,1,loop,1f);
+   // }
 
-    public void playSound(int sound,int loop){
-        AudioManager mgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-        float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
-        float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        float volume = streamVolumeCurrent/streamVolumeMax;
-        soundPool.play(1,volume,volume,1,loop,1f);
-    }
-
-    public void onClick(View v){
-        if(v == musicOn)
-            music.start();
+    public void onClick(View v) {
+        if (v == musicOn) {
+            if (readFile("music.txt").equals("true")) {
+                music.pause();
+                writeFile("music.txt","false");
+                System.out.println(0);
+            }else {
+                music.start();
+                writeFile("music.txt","true");
+                System.out.println(1);
+            }
+        }
     }
 
     //test i/o stream

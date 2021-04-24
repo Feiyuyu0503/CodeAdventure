@@ -14,9 +14,11 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -25,7 +27,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 
 import net.feiyuyu.game.R;
 import net.feiyuyu.game.ui.myGameView;
@@ -69,8 +70,17 @@ public class  learnVar extends Activity {
 
     boolean randomVar = false;    //随机变量或常量,默认false代表常量关卡
 
+    Timer timer;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        //去除标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //去除状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.game_view);
 
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
@@ -84,7 +94,7 @@ public class  learnVar extends Activity {
             //飞去常量代码块
             tv.setText("飞错啦！");
         }
-        System.out.println("hello: "+randomVar);
+        //System.out.println("hello: "+randomVar);
         initNewGame( randomVar );
     }
 
@@ -212,7 +222,7 @@ public class  learnVar extends Activity {
 
         myGameView v = (myGameView)findViewById(R.id.myGameView);
         v.setOnTouchListener(touch);
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -339,15 +349,11 @@ public class  learnVar extends Activity {
             //paint画笔的属性必须在onDraw中设定？
             paint.setStyle(Paint.Style.FILL);
             paint.setAntiAlias(true);
-            paint.setColor(Color.RED);
+            paint.setColor(Color.GRAY);
             paint.setTextSize(200);
 
-            //test
-            //System.out.println("hello: "+ random);
+            //paint.setColor(Color.parseColor("#974CAF50"));
 
-            //test obj
-            canvas.drawText("hello", 60, 200, paint);
-            paint.setColor(Color.parseColor("#974CAF50"));
             //height1 = getRandomH();
             //height2 = getRandomH();
             //System.out.println("hello" + height1 + " " + height2);
@@ -412,6 +418,26 @@ public class  learnVar extends Activity {
 
             }
         }
+    }
+
+    //再按一次返回键退出
+    private long lastBackPressTime = -1L;
+    public void onBackPressed() {
+        long currentTIme = System.currentTimeMillis();
+        if(lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            // 显示提示信息
+            showBackPressTip();
+            // 记录时间
+            lastBackPressTime = currentTIme;
+        }else{
+            //退出应用
+            System.out.println("exit current activity");
+            timer.cancel();
+            finish();
+        }
+    }
+    private void showBackPressTip(){
+        Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
     }
 
     //test i/o stream
