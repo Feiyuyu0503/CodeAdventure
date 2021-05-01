@@ -99,6 +99,12 @@ public class mainActivity extends Activity {
         }
     }
 
+    //后台停止音乐
+    public void onPause(){
+        super.onPause();
+        mp.pause();
+    }
+
     //test i/o stream
     public void writeFile(String fileName,String msg){
         try{

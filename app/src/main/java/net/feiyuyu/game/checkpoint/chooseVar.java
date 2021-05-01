@@ -50,6 +50,12 @@ public class chooseVar extends Activity {
     boolean isSuccess = false; //游戏积分是否达标
     Timer timer;
 
+    Button startBtn;
+    Button createBtn;
+    CardView card;
+    Button okBtn;
+    TextView tv; //更改任务要求
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
@@ -176,11 +182,45 @@ public class chooseVar extends Activity {
         varBtn.setX(vx);
         varBtn1.setX(vx1);
 
-        gameStart();
+
+        tv = (TextView)findViewById(R.id.tv);
+        tv.setText("尝试不要错过任何一个变量吧！");
+        card = (CardView)findViewById(R.id.card);
+        okBtn = (Button)findViewById(R.id.okBtn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.setVisibility(View.GONE);
+            }
+        });
+
+        createBtn = (Button)findViewById(R.id.createBtn);
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.setVisibility(View.VISIBLE);
+            }
+        });
+        createBtn = (Button)findViewById(R.id.createBtn);
+
+        timer = new Timer();   //防止异常退出
+        startBtn = (Button)findViewById(R.id.startButton);
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBtn.setVisibility(View.GONE);
+                createBtn.setVisibility(View.GONE);
+                gameStart();
+            }
+        });
     }
 
     public void gameStart(){
-        timer = new Timer();
+        constBtn.setVisibility(View.VISIBLE);
+        constBtn1.setVisibility(View.VISIBLE);
+        varBtn.setVisibility(View.VISIBLE);
+        varBtn1.setVisibility(View.VISIBLE);
+        //timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

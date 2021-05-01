@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +31,8 @@ import android.widget.Toast;
 
 
 import net.feiyuyu.game.R;
+import net.feiyuyu.game.gameSelectActivity;
+import net.feiyuyu.game.ui.gamePre;
 import net.feiyuyu.game.ui.myGameView;
 
 import org.apache.http.util.EncodingUtils;
@@ -42,8 +46,8 @@ import java.util.TimerTask;
 
 public class  learnVar extends Activity {
 
-    View cardView;
-    View cardView1;
+    CardView cardView;
+    CardView cardView1;
 
     TextView tvScore; //积分显示
 
@@ -51,7 +55,6 @@ public class  learnVar extends Activity {
     TextView taskContent; //任务要求内容"声明一个变量"
 
     Boolean isCorrect = false; //任务答案选择
-    RadioButton choice1,choice2; //任务选项
     Button okBtn; //确认选项按钮
 
     boolean isEnd = false;    //判断游戏是否结束
@@ -71,6 +74,10 @@ public class  learnVar extends Activity {
     boolean randomVar = false;    //随机变量或常量,默认false代表常量关卡
 
     Timer timer;
+
+    Button startBtn;
+
+    Button nextCp;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -182,12 +189,12 @@ public class  learnVar extends Activity {
 
     public void initNewGame(boolean randomVar){
         //隐藏任务要求显示框，并重新设置任务内容
-        cardView = (View)findViewById(R.id.card);
-        cardView1 = (View)findViewById(R.id.card1);
+        cardView = (CardView)findViewById(R.id.card);
+        cardView1 = (CardView)findViewById(R.id.card1);
         cardView.setVisibility(View.GONE);
         cardView1.setVisibility(View.GONE);
-        taskContent = (TextView)findViewById(R.id.taskContent);
-        taskContent.setText("声明一个变量");
+        //taskContent = (TextView)findViewById(R.id.taskContent);
+        //taskContent.setText("声明一个变量");
 
         //设置积分
         tvScore = (TextView)findViewById(R.id.score);
@@ -197,8 +204,6 @@ public class  learnVar extends Activity {
         //游戏结果提示
         //tv  = (TextView)findViewById(R.id.gameState);
 
-        //设置任务要求按钮
-        taskBtn = (Button)findViewById(R.id.createBtn);
 
 
         //"重来"按钮
@@ -211,7 +216,46 @@ public class  learnVar extends Activity {
             }
         });
 
-        gameStart(randomVar);
+        //下一关按钮
+        nextCp = (Button)findViewById(R.id.nextCp);
+        nextCp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(learnVar.this, gamePre.class);
+                intent.putExtra("key",1);
+                startActivity(intent);
+            }
+        });
+
+
+        //设置任务要求按钮
+        taskBtn = (Button)findViewById(R.id.createBtn);
+        taskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        okBtn = (Button)findViewById(R.id.okBtn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardView.setVisibility(View.GONE);
+            }
+        });
+
+        timer = new Timer();   //防止异常退出
+        startBtn = (Button)findViewById(R.id.startButton);
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBtn.setVisibility(View.GONE);
+                taskBtn.setVisibility(View.GONE);
+                gameStart(randomVar);
+            }
+        });
     }
 
     //选项正确，开始游戏
@@ -222,7 +266,7 @@ public class  learnVar extends Activity {
 
         myGameView v = (myGameView)findViewById(R.id.myGameView);
         v.setOnTouchListener(touch);
-        timer = new Timer();
+        //timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -369,10 +413,10 @@ public class  learnVar extends Activity {
                     width, height, matrix, true);//根据缩放比例获取新的位图
 
             //代表变量
-            Bitmap varPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.cube);
+            Bitmap varPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.basket1);
             int vwidth = varPic.getWidth();
             int vheight = varPic.getHeight();
-            matrix.postScale(0.4f, 0.4f);//获取缩放比例
+            matrix.postScale(0.64f, 0.64f);//获取缩放比例
             Bitmap varbmp = Bitmap.createBitmap(varPic, 0, 0,
                     vwidth, vheight, matrix, true);//根据缩放比例获取新的位图
 
@@ -393,13 +437,17 @@ public class  learnVar extends Activity {
                 canvas.drawBitmap(birdbmp, xobj, yobj, paint);
             } else if (isEnd && isConflict && !isSuccess) {
                 //canvas.drawText("游戏结束", screenWidth / 2, screenHeight / 2, paint);
+                timer.cancel();
                 tv.setText("游戏失败！");             //撞而失败
                 cardView1.setVisibility(View.VISIBLE);
             } else if (isEnd && !isConflict && !isSuccess) {
+                timer.cancel();
                 cardView1.setVisibility(View.VISIBLE);     //选择错误而失败
             } else {
+                timer.cancel();
                 tv.setText("游戏成功" +
                     "\n输出:6");
+                nextCp.setEnabled(true);
                 cardView1.setVisibility(View.VISIBLE);
                 //int i = Integer.valueOf(String.valueOf(tvScore.getText())).intValue();
                 int j = Integer.valueOf(String.valueOf(readFile("score.txt")));

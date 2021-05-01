@@ -2,6 +2,7 @@ package net.feiyuyu.game;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +17,13 @@ import net.feiyuyu.game.checkpoint.learnConst;
 import net.feiyuyu.game.checkpoint.learnPoint;
 import net.feiyuyu.game.checkpoint.learnReference.learnReferenceActivity;
 import net.feiyuyu.game.checkpoint.learnVar;
+import net.feiyuyu.game.ui.gamePre;
+
+import org.apache.http.util.EncodingUtils;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class gameSelectActivity extends Activity {
 
@@ -27,6 +35,8 @@ public class gameSelectActivity extends Activity {
     Button btn6;
     Button btn7;
 
+    MediaPlayer music;
+
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -34,6 +44,13 @@ public class gameSelectActivity extends Activity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.game_select);
+
+        music = mainActivity.mp;
+        if(readFile("music.txt").equals("true")) {
+            music.start();
+        }else{
+            music.pause();
+        }
 
         btn1 = (Button) findViewById(R.id.game0);
         btn2 = (Button) findViewById(R.id.game1);
@@ -75,7 +92,8 @@ public class gameSelectActivity extends Activity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(gameSelectActivity.this, learnArray.class);
+                Intent intent = new Intent(gameSelectActivity.this, gamePre.class);
+                intent.putExtra("key",1);
                 startActivity(intent);
             }
         });
@@ -83,7 +101,8 @@ public class gameSelectActivity extends Activity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(gameSelectActivity.this, learnArrayPro.class);
+                Intent intent = new Intent(gameSelectActivity.this, gamePre.class);
+                intent.putExtra("key",2);
                 startActivity(intent);
             }
         });
@@ -91,7 +110,8 @@ public class gameSelectActivity extends Activity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(gameSelectActivity.this, learnPoint.class);
+                Intent intent = new Intent(gameSelectActivity.this, gamePre.class);
+                intent.putExtra("key",3);
                 startActivity(intent);
             }
         });
@@ -103,5 +123,23 @@ public class gameSelectActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    public String readFile(String fileName){
+        String res = "";
+        try{
+            FileInputStream fin = openFileInput(fileName);
+            int length = fin.available();
+            byte [] buffer = new byte[length];
+            fin.read(buffer);
+            res = EncodingUtils.getString(buffer,"UTF-8");
+            fin.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

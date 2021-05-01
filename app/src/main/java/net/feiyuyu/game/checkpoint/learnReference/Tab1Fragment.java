@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -14,6 +15,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Display;
@@ -58,6 +60,10 @@ public class Tab1Fragment extends Fragment {
 
     private EditText et;
 
+    Button taskBtn;
+    Button okBtn;
+    CardView card;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab1, null);
@@ -66,6 +72,9 @@ public class Tab1Fragment extends Fragment {
         timeTextView = view.findViewById(R.id.timeText);
         timeTextView.setVisibility(View.INVISIBLE);
         startButton = view.findViewById(R.id.startButton);
+        taskBtn = view.findViewById(R.id.createBtn);
+        okBtn = view.findViewById(R.id.okBtn);
+        card = view.findViewById(R.id.card);
         //sdp = soundPool.load(getContext(),R.raw.sdp,1);
         //wrong = soundPool.load(getContext(),R.raw.wrong,1);
 
@@ -93,6 +102,7 @@ public class Tab1Fragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View source) {
+                taskBtn.setVisibility(View.GONE);
                 startGame(0);
                 startButton.setVisibility(View.INVISIBLE);
                 //gameView.setBackgroundColor(0xFFFFFFFF);
@@ -136,6 +146,21 @@ public class Tab1Fragment extends Fragment {
                         getActivity().finish();
                     }
                 });
+
+        //显示任务要求
+        taskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.setVisibility(View.VISIBLE);
+            }
+        });
+        //确认任务要求，隐藏任务要求
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.setVisibility(View.GONE);
+            }
+        });
     }
 
     /**
@@ -145,6 +170,7 @@ public class Tab1Fragment extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0x123:
+                    timeTextView.setTextColor(Color.RED);
                     timeTextView.setText("目前用时： " + gameTime);
                     gameTime++; // 游戏剩余时间减少
                     // 时间小于0, 游戏失败

@@ -95,8 +95,8 @@ public class learnConst extends Activity {
         cardView1 = (View)findViewById(R.id.card1);
         tv  = (TextView)findViewById(R.id.gameState);
         tvScore = (TextView)findViewById(R.id.score);
-        constVar = (RadioButton)findViewById(R.id.constVar);
-        var = (RadioButton)findViewById(R.id.var);
+        //constVar = (RadioButton)findViewById(R.id.constVar);
+        //var = (RadioButton)findViewById(R.id.var);
 
         initGame();
 

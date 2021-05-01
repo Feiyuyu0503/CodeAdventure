@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Score"
+            android:textColor="#FF5722"
             android:textSize="24dp"
             android:fontFamily="@font/font18">
         </TextView>
@@ -23,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:textColor="#FF5722"
             android:textSize="24dp"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/font18">

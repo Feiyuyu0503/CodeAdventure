@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 
 import net.feiyuyu.game.R;
+import net.feiyuyu.game.gameSelectActivity;
+import net.feiyuyu.game.ui.gamePre;
 import net.feiyuyu.game.ui.mapViewLayout;
 
 import org.apache.http.util.EncodingUtils;
@@ -333,7 +335,8 @@ public class learnArrayPro extends Activity {
                     finish();
                     startActivity(getIntent());    //重启当前activity
                 }else{
-                    Intent intent = new Intent(learnArrayPro.this, learnArrayPro.class);
+                    Intent intent = new Intent(learnArrayPro.this, gamePre.class);
+                    intent.putExtra("key",3);
                     startActivity(intent);
                     finish();
                 }

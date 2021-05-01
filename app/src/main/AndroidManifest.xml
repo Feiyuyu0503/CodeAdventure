@@ -90,6 +90,13 @@
             android:name=".checkpoint.learnReference.learnReferenceActivity"
             android:label="学习引用">
         </activity>
+
+        <activity
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".ui.gamePre"
+            android:label="游戏开始界面">
+        </activity>
    </application>
 
 </manifest>

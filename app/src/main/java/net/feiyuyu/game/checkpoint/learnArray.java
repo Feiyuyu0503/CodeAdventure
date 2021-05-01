@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 
 import net.feiyuyu.game.R;
+import net.feiyuyu.game.gameSelectActivity;
+import net.feiyuyu.game.ui.gamePre;
 import net.feiyuyu.game.ui.mapViewLayout;
 
 import org.apache.http.util.EncodingUtils;
@@ -71,6 +73,10 @@ public class learnArray extends Activity {
         scoreTv = (TextView)findViewById(R.id.scoreTv);
         scoreTv.setText(readFile("score.txt"));
 
+        gameStart();
+    }
+
+    public void gameStart(){
         cv = (CardView)findViewById(R.id.cv);
         cv1 = (CardView)findViewById(R.id.cv1);
         tvLeft = (TextView)findViewById(R.id.numOfLeft);
@@ -96,7 +102,7 @@ public class learnArray extends Activity {
                     tvLeft.setText("0");
                     Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvLeft.setText(i+"");
+                    tvLeft.setText(i+"");
             }
         });
 
@@ -110,7 +116,7 @@ public class learnArray extends Activity {
                     tvUp.setText("0");
                     Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvUp.setText(i+"");
+                    tvUp.setText(i+"");
             }
         });
 
@@ -124,7 +130,7 @@ public class learnArray extends Activity {
                     tvRight.setText("0");
                     Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvRight.setText(i+"");
+                    tvRight.setText(i+"");
             }
         });
 
@@ -138,7 +144,7 @@ public class learnArray extends Activity {
                     tvDown.setText("0");
                     Toast.makeText(learnArray.this, "太大啦", Toast.LENGTH_SHORT).show();
                 }else
-                tvDown.setText(i+"");
+                    tvDown.setText(i+"");
             }
         });
 
@@ -172,14 +178,14 @@ public class learnArray extends Activity {
                             int temp = mapViewLayout1.returnPosition(x,y);   //找到鸟的位置
                             x = temp/10;
                             y = temp%10;
-                                try {
-                                    isSuccess = mapViewLayout1.move(x, y, "left", leftNum);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                            try {
+                                isSuccess = mapViewLayout1.move(x, y, "left", leftNum);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             count--;
                             if(count<=0) isSuccess();
-                            }
+                        }
                     });
                 }
                 if(upNum>0) {
@@ -214,11 +220,11 @@ public class learnArray extends Activity {
                             int temp = mapViewLayout1.returnPosition(x,y);   //找到鸟的位置
                             x = temp/10;
                             y = temp%10;
-                                try {
-                                    isSuccess = mapViewLayout1.move(x, y, "right", rightNum);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                            try {
+                                isSuccess = mapViewLayout1.move(x, y, "right", rightNum);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             count--;
                             if(count<=0) isSuccess();
 
@@ -333,7 +339,8 @@ public class learnArray extends Activity {
                     finish();
                     startActivity(getIntent());    //重启当前activity
                 }else{
-                    Intent intent = new Intent(learnArray.this, learnArrayPro.class);
+                    Intent intent = new Intent(learnArray.this, gamePre.class);
+                    intent.putExtra("key",2);
                     startActivity(intent);
                     finish();
                 }

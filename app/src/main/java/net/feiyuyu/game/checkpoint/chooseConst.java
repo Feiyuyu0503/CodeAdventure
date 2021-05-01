@@ -60,6 +60,11 @@ public class chooseConst extends Activity {
 
     Timer timer;
 
+    Button startBtn;
+    Button createBtn;
+    CardView card;
+    Button okBtn;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
@@ -187,13 +192,45 @@ public class chooseConst extends Activity {
         //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(-1,-1);
         //addContentView(cb,layoutParams);
 
-        gameStart();
-        //System.out.println("there");
+
+        card = (CardView)findViewById(R.id.card);
+        okBtn = (Button)findViewById(R.id.okBtn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.setVisibility(View.GONE);
+            }
+        });
+
+        createBtn = (Button)findViewById(R.id.createBtn);
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                card.setVisibility(View.VISIBLE);
+            }
+        });
+
+        timer = new Timer();   //防止异常退出
+        startBtn = (Button)findViewById(R.id.startButton);
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBtn.setVisibility(View.GONE);
+                createBtn.setVisibility(View.GONE);
+                gameStart();
+            }
+        });
+
     }
 
     public void gameStart(){
 
-        timer = new Timer();
+        constBtn.setVisibility(View.VISIBLE);
+        constBtn1.setVisibility(View.VISIBLE);
+        varBtn.setVisibility(View.VISIBLE);
+        varBtn1.setVisibility(View.VISIBLE);
+
+        //timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
