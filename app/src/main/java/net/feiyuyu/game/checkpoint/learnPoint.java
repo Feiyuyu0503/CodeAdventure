@@ -1,11 +1,13 @@
 package net.feiyuyu.game.checkpoint;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +19,9 @@ import com.bin.david.form.core.TableConfig;
 import com.bin.david.form.data.style.FontStyle;
 
 import net.feiyuyu.game.R;
+import net.feiyuyu.game.checkpoint.learnReference.learnReferenceActivity;
 import net.feiyuyu.game.pointData;
+import net.feiyuyu.game.ui.gamePre;
 import net.feiyuyu.game.ui.myImageButton;
 import net.feiyuyu.game.ui.tableLayout;
 
@@ -57,6 +61,9 @@ public class learnPoint extends Activity {
 
     TextView scoreTv;
 
+    TextView gameStateTv;
+    Button retryOrNextCpBtn;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
@@ -84,7 +91,9 @@ public class learnPoint extends Activity {
         grape = (myImageButton)findViewById(R.id.grapeBtn);grape.setName("grape");
         lemon = (myImageButton)findViewById(R.id.lemonBtn);lemon.setName("lemon");
 
-        scoreTv = (TextView) findViewById(R.id.scoreTv);
+        scoreTv = (TextView)findViewById(R.id.scoreTv);
+        gameStateTv = (TextView)findViewById(R.id.gameStateTv);
+        retryOrNextCpBtn = (Button)findViewById(R.id.retryOrNextBtn);
 
         initGame();
     }
@@ -316,12 +325,35 @@ public class learnPoint extends Activity {
     //判断游戏是否成功
     public void isSuccess(){
         if(count==0){
+            card1.setVisibility(View.VISIBLE);
             if(isSuccess) {
-                Toast.makeText(learnPoint.this, "游戏成功！", Toast.LENGTH_SHORT).show();
+                gameStateTv.setVisibility(View.VISIBLE);
+                //Toast.makeText(learnPoint.this, "游戏成功！", Toast.LENGTH_SHORT).show();
                 addScore(50);
+                retryOrNextCpBtn.setVisibility(View.VISIBLE);
+                retryOrNextCpBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(learnPoint.this, learnReferenceActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             }
-            else
-                Toast.makeText(learnPoint.this, "游戏失败！", Toast.LENGTH_SHORT).show();
+            else {
+                gameStateTv.setText("Fail");
+                gameStateTv.setVisibility(View.VISIBLE);
+                retryOrNextCpBtn.setText("重玩");
+                retryOrNextCpBtn.setVisibility(View.VISIBLE);
+                retryOrNextCpBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(getIntent());
+                        finish();
+                    }
+                });
+                //Toast.makeText(learnPoint.this, "游戏失败！", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

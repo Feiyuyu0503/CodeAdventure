@@ -56,6 +56,8 @@ public class chooseVar extends Activity {
     Button okBtn;
     TextView tv; //更改任务要求
 
+    TextView cpName;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
@@ -74,6 +76,10 @@ public class chooseVar extends Activity {
 
         //游戏成功提示
         tip = (CardView) findViewById(R.id.tipCard);
+
+        //更新关卡名
+        cpName = (TextView)findViewById(R.id.cpName);
+        cpName.setText("认识变量");
 
         //"重玩"按钮
         retry = (Button) findViewById(R.id.retry);

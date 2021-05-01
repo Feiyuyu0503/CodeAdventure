@@ -59,6 +59,7 @@ public class settingActivity extends Activity implements OnClickListener {
             music.pause();
         }
 
+        /*
         backBtn = (Button)findViewById(R.id.backBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +70,7 @@ public class settingActivity extends Activity implements OnClickListener {
                 finish();
             }
         });
+         */
 
         //writeFile("a.txt","你好");
         //TextView tv = findViewById(R.id.userName);

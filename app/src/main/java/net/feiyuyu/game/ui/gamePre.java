@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.feiyuyu.game.R;
 import net.feiyuyu.game.checkpoint.learnArray;
@@ -33,6 +34,7 @@ public class gamePre extends Activity {
 
     TextView scoreTv;
     TextView taskTv;
+    TextView cpName;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,18 @@ public class gamePre extends Activity {
         //接收参数
         Intent intent = getIntent();
         this.i = intent.getIntExtra("key",0);
+        //更新关卡名
+        cpName = (TextView)findViewById(R.id.cpName);
+        switch (i){
+            case 2:
+                cpName.setText("认识数组II");
+                break;
+            case 3:
+                cpName.setText("认识指针");
+                break;
+            default:
+                break;
+        }
 
         //显示积分
         scoreTv = (TextView)findViewById(R.id.score);
@@ -100,6 +114,26 @@ public class gamePre extends Activity {
             }
         });
 
+    }
+
+    //再按一次返回键退出
+    private long lastBackPressTime = -1L;
+    public void onBackPressed() {
+        long currentTIme = System.currentTimeMillis();
+        if(lastBackPressTime == -1L || currentTIme - lastBackPressTime >= 2000){
+            // 显示提示信息
+            showBackPressTip();
+            // 记录时间
+            lastBackPressTime = currentTIme;
+        }else{
+            //退出应用
+            System.out.println("exit current activity");
+            //timer.cancel();
+            finish();
+        }
+    }
+    private void showBackPressTip(){
+        Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
     }
 
     public String readFile(String fileName){
