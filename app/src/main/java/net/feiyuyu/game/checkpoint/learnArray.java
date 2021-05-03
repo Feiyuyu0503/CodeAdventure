@@ -336,8 +336,10 @@ public class learnArray extends Activity {
             @Override
             public void onClick(View v) {
                 if(String.valueOf(retryOrNextBtn.getText())=="重玩"){
+                    Intent intent = new Intent(learnArray.this, gamePre.class);
+                    intent.putExtra("key",1);
+                    startActivity(intent);
                     finish();
-                    startActivity(getIntent());    //重启当前activity
                 }else{
                     Intent intent = new Intent(learnArray.this, gamePre.class);
                     intent.putExtra("key",2);

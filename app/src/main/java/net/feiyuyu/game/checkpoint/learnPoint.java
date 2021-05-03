@@ -348,7 +348,9 @@ public class learnPoint extends Activity {
                 retryOrNextCpBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(getIntent());
+                        Intent intent = new Intent(learnPoint.this, gamePre.class);
+                        intent.putExtra("key",3);
+                        startActivity(intent);
                         finish();
                     }
                 });

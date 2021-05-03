@@ -332,8 +332,10 @@ public class learnArrayPro extends Activity {
             @Override
             public void onClick(View v) {
                 if(String.valueOf(retryOrNextBtn.getText())=="重玩"){
+                    Intent intent = new Intent(learnArrayPro.this, gamePre.class);
+                    intent.putExtra("key",2);
+                    startActivity(intent);
                     finish();
-                    startActivity(getIntent());    //重启当前activity
                 }else{
                     Intent intent = new Intent(learnArrayPro.this, gamePre.class);
                     intent.putExtra("key",3);
