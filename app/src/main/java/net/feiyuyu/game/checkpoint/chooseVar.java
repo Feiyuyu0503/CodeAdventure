@@ -55,6 +55,7 @@ public class chooseVar extends Activity {
     CardView card;
     Button okBtn;
     TextView tv; //更改任务要求
+    TextView gameStateTv;
 
     TextView cpName;
 
@@ -216,6 +217,7 @@ public class chooseVar extends Activity {
             public void onClick(View v) {
                 startBtn.setVisibility(View.GONE);
                 createBtn.setVisibility(View.GONE);
+                cpName.setVisibility(View.GONE);
                 gameStart();
             }
         });
@@ -226,6 +228,9 @@ public class chooseVar extends Activity {
         constBtn1.setVisibility(View.VISIBLE);
         varBtn.setVisibility(View.VISIBLE);
         varBtn1.setVisibility(View.VISIBLE);
+
+        gameStateTv = (TextView)findViewById(R.id.gameState);
+        gameStateTv.setText("游戏成功！\n变量声明示例:\nint var=5;");
         //timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -304,7 +309,7 @@ public class chooseVar extends Activity {
 
     public boolean isSuccess(){
         String res = readFile("score.txt");
-        if(Integer.valueOf(res)>=300) {
+        if(Integer.valueOf(res)>=200) {
             //Configuration.cp1 = 1;
             isSuccess = true;
             return true;

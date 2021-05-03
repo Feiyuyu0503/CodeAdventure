@@ -189,7 +189,7 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="success"
+                android:text="success\n指针声明示例：\nint a;\nint *p=&amp;a;"
                 android:textSize="24dp"
                 android:fontFamily="@font/font18"
                 android:layout_gravity="center">
@@ -203,7 +203,7 @@
                 android:textSize="24dp"
                 android:fontFamily="@font/font18"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp">
+                android:layout_marginTop="80dp">
             </Button>
 
         </android.support.v7.widget.CardView>

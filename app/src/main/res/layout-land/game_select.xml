@@ -22,84 +22,94 @@
             <Button
                 android:id="@+id/game0"
                 android:layout_width="180dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/img"
+                android:drawableTop="@drawable/apple_150"
+                android:background="@android:color/transparent"
                 android:fontFamily="@font/font18"
-                android:text="认识\n常量"
+                android:text="认识常量"
                 android:textSize="36sp"
+                android:gravity="center"
+
                 app:srcCompat="@android:drawable/toast_frame" />
+            <!-- <android:background="#974CAF50"/> -->
 
             <Button
                 android:id="@+id/game1"
                 android:layout_width="180dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:background="#974CAF50"
+                android:drawableTop="@drawable/basket1"
+                android:background="@android:color/transparent"
                 android:fontFamily="@font/font18"
-                android:text="认识\n变量"
+                android:text="认识变量"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
             <Button
                 android:id="@+id/game2"
                 android:layout_width="180dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:background="#974CAF50"
+                android:drawableTop="@drawable/fruitbasket"
+                android:background="@android:color/transparent"
                 android:fontFamily="@font/font18"
-                android:text="常/变量\n综合"
-                android:textSize="36sp"
+                android:text="常/变量综合"
+                android:textSize="30sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
             <Button
                 android:id="@+id/game3"
                 android:layout_width="180dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:background="#974CAF50"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/mocube1"
                 android:fontFamily="@font/font18"
-                android:text="认识\n数组"
+                android:text="认识数组"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
             <Button
                 android:id="@+id/game4"
                 android:layout_width="180dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:background="#974CAF50"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/mocube"
                 android:fontFamily="@font/font18"
-                android:text="认识\n数组II"
+                android:text="认识数组II"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
             <Button
                 android:id="@+id/game5"
                 android:layout_width="180dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:background="#974CAF50"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/build"
                 android:fontFamily="@font/font18"
-                android:text="认识\n指针"
+                android:text="认识指针"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
             <Button
                 android:id="@+id/game6"
                 android:layout_width="180dp"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="40dp"
-                android:background="#974CAF50"
+                android:background="@android:color/transparent"
+                android:drawableTop="@drawable/re"
                 android:fontFamily="@font/font18"
-                android:text="认识\n引用"
+                android:text="认识引用"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
             />

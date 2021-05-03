@@ -341,7 +341,7 @@ public class learnPoint extends Activity {
                 });
             }
             else {
-                gameStateTv.setText("Fail");
+                gameStateTv.setText("游戏失败！\n指针是存放变量地址的变量！");
                 gameStateTv.setVisibility(View.VISIBLE);
                 retryOrNextCpBtn.setText("重玩");
                 retryOrNextCpBtn.setVisibility(View.VISIBLE);

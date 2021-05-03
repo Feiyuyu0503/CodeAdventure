@@ -12,10 +12,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -50,6 +53,7 @@ public class  learnVar extends Activity {
     CardView cardView1;
 
     TextView tvScore; //积分显示
+    TextView scoreTv;
 
     Button taskBtn;
     TextView taskContent; //任务要求内容"声明一个变量"
@@ -78,6 +82,10 @@ public class  learnVar extends Activity {
     Button startBtn;
 
     Button nextCp;
+
+    TextView cpName;
+
+    myGameView myGameView;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -195,6 +203,11 @@ public class  learnVar extends Activity {
         cardView1.setVisibility(View.GONE);
         //taskContent = (TextView)findViewById(R.id.taskContent);
         //taskContent.setText("声明一个变量");
+        cpName = (TextView)findViewById(R.id.cpName);
+        myGameView = (myGameView)findViewById(R.id.myGameView);
+        scoreTv = (TextView)findViewById(R.id.textView);
+        //scoreTv.setLeftTopRightBottom(-1,0,200,0);
+
 
         //设置积分
         tvScore = (TextView)findViewById(R.id.score);
@@ -249,10 +262,14 @@ public class  learnVar extends Activity {
         timer = new Timer();   //防止异常退出
         startBtn = (Button)findViewById(R.id.startButton);
         startBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View v) {
                 startBtn.setVisibility(View.GONE);
                 taskBtn.setVisibility(View.GONE);
+                cpName.setVisibility(View.GONE);
+                myGameView.setVisibility(View.VISIBLE);
+                //scoreTv.setLeftTopRightBottom(100,100,100,100);
                 gameStart(randomVar);
             }
         });
@@ -401,8 +418,11 @@ public class  learnVar extends Activity {
             //height1 = getRandomH();
             //height2 = getRandomH();
             //System.out.println("hello" + height1 + " " + height2);
-            canvas.drawRect(700, 0, 760, height1 + 150, paint);
-            canvas.drawRect(1200, height2 + 550, 1260, 1080, paint);
+            //游戏结束，清空画布
+            if (!isEnd) {
+                canvas.drawRect(700, 0, 760, height1 + 150, paint);
+                canvas.drawRect(1200, height2 + 550, 1260, 1080, paint);
+            }
 
             Bitmap birdPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.bird);
             int width = birdPic.getWidth();
@@ -421,10 +441,10 @@ public class  learnVar extends Activity {
                     vwidth, vheight, matrix, true);//根据缩放比例获取新的位图
 
             //代表常量
-            Bitmap ConstvarPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.apple);
+            Bitmap ConstvarPic = BitmapFactory.decodeResource(this.getResources(), R.drawable.apple_48);
             vwidth = ConstvarPic.getWidth();
             vheight = ConstvarPic.getHeight();
-            matrix.postScale(1f, 1f);//获取缩放比例
+            matrix.postScale(2.8f, 2.8f);//获取缩放比例
             Bitmap Constvarbmp = Bitmap.createBitmap(ConstvarPic, 0, 0,
                     vwidth, vheight, matrix, true);//根据缩放比例获取新的位图
 
@@ -445,8 +465,9 @@ public class  learnVar extends Activity {
                 cardView1.setVisibility(View.VISIBLE);     //选择错误而失败
             } else {
                 timer.cancel();
-                tv.setText("游戏成功" +
-                    "\n输出:6");
+                tv.setText("游戏成功！" +
+                    "\n输出:6\n常量与变量最基本的区别就是常量的值不可改变，而变量还可以再赋值");
+                //canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                 nextCp.setEnabled(true);
                 cardView1.setVisibility(View.VISIBLE);
                 //int i = Integer.valueOf(String.valueOf(tvScore.getText())).intValue();

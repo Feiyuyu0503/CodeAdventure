@@ -63,6 +63,7 @@ public class Tab1Fragment extends Fragment {
     Button taskBtn;
     Button okBtn;
     CardView card;
+    TextView cpName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class Tab1Fragment extends Fragment {
         taskBtn = view.findViewById(R.id.createBtn);
         okBtn = view.findViewById(R.id.okBtn);
         card = view.findViewById(R.id.card);
+        cpName = view.findViewById(R.id.cpName);
         //sdp = soundPool.load(getContext(),R.raw.sdp,1);
         //wrong = soundPool.load(getContext(),R.raw.wrong,1);
 
@@ -107,6 +109,7 @@ public class Tab1Fragment extends Fragment {
                 startButton.setVisibility(View.INVISIBLE);
                 //gameView.setBackgroundColor(0xFFFFFFFF);
                 timeTextView.setVisibility(View.VISIBLE);
+                cpName.setVisibility(View.GONE);
             }
         });
         // 为游戏区域的触碰事件绑定监听器
@@ -129,7 +132,7 @@ public class Tab1Fragment extends Fragment {
                     }
                 });
         // 初始化游戏胜利的对话框
-        successDialog = createDialog("Success", "你真厉害！恭喜你通过所有关卡！",
+        successDialog = createDialog("游戏成功", "引用声明示例:\nint a;\nint &b=a;\n你真厉害！恭喜你通过所有关卡！",
                 R.drawable.success).setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

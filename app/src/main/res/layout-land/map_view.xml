@@ -277,7 +277,7 @@
                     android:id="@+id/gameState"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="游戏成功!"
+                    android:text="游戏成功!\n数组声明示例：\nint arr[4];\n注意数组开辟得太大会浪费内存空间"
                     android:fontFamily="@font/font18"
                     android:textSize="24dp"
                     android:layout_gravity="center">
@@ -289,7 +289,7 @@
                     android:layout_height="wrap_content"
                     android:text="下一关"
                     android:layout_gravity="bottom|center"
-                    android:layout_marginBottom="30dp">
+                    >
                 </Button>
             </android.support.v7.widget.CardView>
 

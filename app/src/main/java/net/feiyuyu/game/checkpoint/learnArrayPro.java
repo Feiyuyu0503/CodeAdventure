@@ -348,6 +348,7 @@ public class learnArrayPro extends Activity {
     public void isSuccess(){
         if(isSuccess) {
             //Toast.makeText(learnArray.this, "游戏成功！", Toast.LENGTH_SHORT).show();
+            gameStateTv.setText("游戏成功!\n数组声明示例：\nint arr[2];\ndouble array[4];\n数组存在越界问题，而稍微开辟大一点的内存空间却不会使程序出错");
             cv1.setVisibility(View.VISIBLE);
             int i = Integer.valueOf(String.valueOf(scoreTv.getText()))+50;
             writeFile("score.txt",i+"");

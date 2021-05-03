@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img3"
+    android:background="@drawable/img1"
     tools:ignore="MissingDefaultResource">
 
     <TextView
@@ -166,8 +166,6 @@
         android:text="Score:"
         android:textColor="#FF5722"
         android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="120dp"
         tools:ignore="MissingConstraints"></TextView>
 
     <TextView
@@ -186,7 +184,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/tipCard"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
         android:background="@color/purple_200"
@@ -205,7 +203,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
             android:fontFamily="@font/font18"
-            android:text="游戏成功！"
+            android:text="游戏成功！\n常量声明示例:\nconst int var=6;"
             android:textSize="30sp"></TextView>
         <LinearLayout
             android:layout_width="wrap_content"

@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="    引用是变量的别名，不存在空引用，因此必须在创建时被初始化。假定相同水果相连的过程为引用变量的初始化，请在规定时间内完成所有引用变量的初始化"
+            android:text="    引用是变量的别名，不存在空引用，因此必须在创建时被初始化。假定相同水果相连的过程为引用变量的初始化，请在规定时间内完成游戏"
             android:textSize="24dp"
             android:fontFamily="@font/font18">
         </TextView>

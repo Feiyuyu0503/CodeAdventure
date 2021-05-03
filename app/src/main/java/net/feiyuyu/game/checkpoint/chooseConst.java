@@ -64,6 +64,7 @@ public class chooseConst extends Activity {
     Button createBtn;
     CardView card;
     Button okBtn;
+    TextView cpName;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -210,6 +211,7 @@ public class chooseConst extends Activity {
             }
         });
 
+        cpName = (TextView)findViewById(R.id.cpName);
         timer = new Timer();   //防止异常退出
         startBtn = (Button)findViewById(R.id.startButton);
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -217,6 +219,7 @@ public class chooseConst extends Activity {
             public void onClick(View v) {
                 startBtn.setVisibility(View.GONE);
                 createBtn.setVisibility(View.GONE);
+                cpName.setVisibility(View.GONE);
                 gameStart();
             }
         });
