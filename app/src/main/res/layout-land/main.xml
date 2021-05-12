@@ -58,17 +58,16 @@
 
         <Button
             android:id="@+id/gameStartBtn"
-            android:layout_width="195dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="#673AB7"
             android:fontFamily="@font/font18"
             android:insetLeft="15dp"
             android:insetRight="15dp"
             android:text="开始游戏"
+            android:background="@drawable/round_btn"
             android:textColor="@color/white"
             android:textSize="30sp" />
-
     </LinearLayout>
 
 </LinearLayout>

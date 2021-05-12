@@ -29,6 +29,7 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/font18"
                 android:text="认识常量"
+                android:textColor="@color/white"
                 android:textSize="36sp"
                 android:gravity="center"
 
@@ -45,6 +46,7 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/font18"
                 android:text="认识变量"
+                android:textColor="@color/white"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
@@ -58,6 +60,7 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/font18"
                 android:text="常/变量综合"
+                android:textColor="@color/white"
                 android:textSize="30sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
@@ -71,6 +74,7 @@
                 android:drawableTop="@drawable/mocube1"
                 android:fontFamily="@font/font18"
                 android:text="认识数组"
+                android:textColor="@color/white"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
@@ -84,6 +88,7 @@
                 android:drawableTop="@drawable/mocube"
                 android:fontFamily="@font/font18"
                 android:text="认识数组II"
+                android:textColor="@color/white"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
@@ -97,6 +102,7 @@
                 android:drawableTop="@drawable/build"
                 android:fontFamily="@font/font18"
                 android:text="认识指针"
+                android:textColor="@color/white"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
 
@@ -110,6 +116,7 @@
                 android:drawableTop="@drawable/re"
                 android:fontFamily="@font/font18"
                 android:text="认识引用"
+                android:textColor="@color/white"
                 android:textSize="36sp"
                 app:srcCompat="@android:drawable/toast_frame" />
             />
